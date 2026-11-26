@@ -1,0 +1,138 @@
+/*
+ * Design Tokens — الألوان من دليل الهوية البصرية السورية (syrian.zone/syid).
+ * الطبقة الأولى: ألوان اللوحة الخام (تُطابق src/config/tokens.ts).
+ * الطبقة الثانية: أدوار دلالية تتبدّل بين الثيمين الداكن والفاتح.
+ * المكونات تستخدم الأدوار الدلالية فقط، فيكفي هذا الملف لتغيير الثيم كاملاً.
+ */
+
+/*
+ * خط الموقع: «المراعي» (Almarai) — مفتوح المصدر بترخيص SIL OFL 1.1، مضمَّن محلياً
+ * (WOFF2 عبر @fontsource/almarai، انظر src/main.tsx) فيراه كل الزوار كما هو.
+ * أوزانه: 300 · 400 · 700 · 800.
+ *
+ * خط الهوية الرسمي «قمرة» مدفوع ولا يُضمَّن دون رخصة ويب. عند توفرها ضع ملفات WOFF2
+ * في public/fonts، فعّل التعريف التالي، ثم أضف 'Qomra' في أول --font وفي config/tokens.ts:
+ *
+ * @font-face { font-family: 'Qomra'; font-weight: 400; font-display: swap; src: url('/fonts/qomra-regular.woff2') format('woff2'); }
+ * @font-face { font-family: 'Qomra'; font-weight: 700; font-display: swap; src: url('/fonts/qomra-bold.woff2') format('woff2'); }
+ */
+
+:root {
+  /* ───── اللوحة الخام ───── */
+  /* Forest */
+  --forest-light: #428177;
+  --forest: #054239;
+  --forest-deep: #002623;
+  /* Golden Wheat */
+  --wheat-light: #edebe0;
+  --wheat: #b9a779;
+  --wheat-deep: #988561;
+  /* Deep Umber */
+  --umber-light: #6b1f2a;
+  --umber: #4a151e;
+  --umber-deep: #260f14;
+  /* Charcoal */
+  --white: #ffffff;
+  --charcoal: #3d3a3b;
+  --charcoal-deep: #161616;
+
+  --font: 'Almarai', 'Segoe UI', Tahoma, sans-serif;
+
+  --text-xs: 0.78rem;
+  --text-sm: 0.9rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: clamp(2.2rem, 5vw, 3.6rem);
+  --text-3xl: clamp(2.6rem, 6.4vw, 5rem);
+  --text-display: clamp(3.4rem, 11.5vw, 9.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+  --space-9: clamp(5rem, 12vw, 9rem);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 26px;
+  --radius-pill: 999px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 420ms;
+  --z-stage: 0;
+  --z-overlay: 10;
+  --z-modal: 20;
+  --z-loading: 30;
+  /* floating dock: bottom-docked in simple mode; layers above it (toast, page padding) offset by these */
+  --dock-h: 3.5rem;
+  --dock-gap: 1rem;
+}
+
+/* ───── الثيم الداكن (الافتراضي) ───── */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: var(--forest-deep);
+  --bg-alt: color-mix(in srgb, var(--forest) 38%, var(--forest-deep));
+  --surface: color-mix(in srgb, var(--forest) 62%, var(--forest-deep));
+  --surface-raised: var(--forest);
+  --surface-glass: rgb(0 38 35 / 0.78);
+  --surface-solid: var(--forest-deep);
+  --border: rgb(185 167 121 / 0.24);
+  --border-strong: rgb(185 167 121 / 0.6);
+  --text: var(--wheat-light);
+  --text-strong: var(--white);
+  --text-muted: rgb(237 235 224 / 0.68);
+  --accent: var(--wheat);
+  --accent-hover: var(--wheat-light);
+  --accent-contrast: var(--forest-deep);
+  --success: #3ecf7a;
+  /* لون العناوين العملاقة الثانوي */
+  --accent-display: var(--wheat);
+  --ornament: var(--wheat);
+  --ornament-soft: rgb(185 167 121 / 0.16);
+  --feature-bg: var(--umber);
+  --feature-text: var(--wheat-light);
+  --feature-accent: var(--wheat);
+  --scrim: rgb(0 0 0 / 0.62);
+  --scrim-soft: rgb(0 0 0 / 0.5);
+  --halo: 0 2px 22px rgb(0 0 0 / 0.8);
+  --shadow: 0 26px 70px rgb(0 0 0 / 0.5);
+  --shadow-soft: 0 10px 30px rgb(0 0 0 / 0.3);
+}
+
+/* ───── الثيم الفاتح ───── */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: var(--wheat-light);
+  --bg-alt: color-mix(in srgb, var(--wheat) 20%, var(--wheat-light));
+  --surface: var(--white);
+  --surface-raised: var(--white);
+  --surface-glass: rgb(255 255 255 / 0.78);
+  --surface-solid: var(--white);
+  --border: rgb(5 66 57 / 0.16);
+  --border-strong: rgb(5 66 57 / 0.5);
+  --text: var(--forest-deep);
+  --text-strong: var(--forest-deep);
+  --text-muted: rgb(61 58 59 / 0.86);
+  --accent: var(--forest);
+  --accent-hover: var(--forest-light);
+  --accent-contrast: var(--wheat-light);
+  --success: #1f8a4c;
+  --accent-display: var(--umber-light);
+  --ornament: var(--wheat-deep);
+  --ornament-soft: rgb(152 133 97 / 0.22);
+  --feature-bg: var(--forest);
+  --feature-text: var(--wheat-light);
+  --feature-accent: var(--wheat);
+  --scrim: rgb(237 235 224 / 0.82);
+  --scrim-soft: rgb(237 235 224 / 0.7);
+  --halo: 0 1px 16px rgb(237 235 224 / 0.95);
+  --shadow: 0 26px 70px rgb(5 66 57 / 0.16);
+  --shadow-soft: 0 10px 30px rgb(5 66 57 / 0.1);
+}
